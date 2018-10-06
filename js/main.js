@@ -62,7 +62,7 @@ let map = {
 
         var request = {
             location: location,
-            radius: '10000',
+            radius: '500',
             keyword: key,
             minPriceLevel: min,
             maxPriceLevel: max,
