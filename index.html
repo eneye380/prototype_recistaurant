@@ -14,7 +14,7 @@
     <link rel="stylesheet" media="screen and (max-width: 500px)" href="css/styles-small.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
         crossorigin="" />
-    
+
     <title>ReciStaurant</title>
 </head>
 
@@ -29,7 +29,11 @@
         <section id="map-container">
             <div id="map" role="application" aria-label="Map showing restaurants" tabindex="0"></div>
         </section>
-
+        <div id="form-search">
+            <label for="locationpara"></label>
+            <input type="text" class="form-control input-sm" id="locationpara" value="" name="location" placeholder="click & type a location">
+            <!--p class='text-center' id='hint' style='color:red'></p-->
+        </div>
         <button id='prompt' style='display:none'>Install</button>
     </main>
 

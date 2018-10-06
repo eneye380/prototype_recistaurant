@@ -1,10 +1,33 @@
-#footer{
-    background: transparent;
-}
-header nav{
+#footer {
     background: transparent;
 }
 
-header nav a{
+header nav {
+    background: transparent;
+}
+
+header nav a {
     color: black;
 }
+
+#form-search {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    background: transparent;
+}
+
+input {
+    color: white;
+    height: 40px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: center;
+}
+
+input:focus{
+    background: black;
+    border:0.5px dotted purple;
+}
+
