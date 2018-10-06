@@ -47,14 +47,16 @@ let map = {
         infowindow.open(this.map, marker);
         this.autocomplete(this.map);
     },
-    initRestaurants: function (location, key = 'dinner', min = 0, max = 5) {
-        
+    initRestaurants: function (obj, key = 'dinner', min = 0, max = 5) {
+        let location = obj.location;
+        let title = obj.title;
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: location,
-            zoom: 4
+            zoom: 4,
+            mapTypeControl:false 
         });
-        console.log("initRestaurants::map",this.map);
-        console.log("initRestaurants::location",location);
+        console.log("initRestaurants::map", this.map);
+        console.log("initRestaurants::location", location);
 
         bounds = new google.maps.LatLngBounds();
         bounds.extend(location);
@@ -66,21 +68,21 @@ let map = {
             keyword: key,
             minPriceLevel: min,
             maxPriceLevel: max,
-            types: ['restaurant']
-            //types: ['restaurant', 'cafe', 'meal_delivery', 'meal_takeaway', 'asian', 'food', 'drink']
+            //types: ['restaurant']
+            types: ['restaurant', 'cafe', 'meal_delivery', 'meal_takeaway', 'asian', 'food', 'drink']
 
         };
         //
         var marker = new google.maps.Marker({
             position: location,
             animation: google.maps.Animation.BOUNCE,
-            title: "My Approximate Current Position"
+            title: title
         });
         // 
         marker.setMap(this.map);
         //
         var infowindow = new google.maps.InfoWindow({
-            content: "My Approximate Current Position",
+            content: title,
         });
         infowindow.open(this.map, marker);
         service = new google.maps.places.PlacesService(this.map); //service:PlacesService
@@ -98,7 +100,10 @@ let map = {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         let location = new google.maps.LatLng(lat, lon);
-        map.initRestaurants(location);
+        map.initRestaurants({
+            location: location,
+            title: 'My Location'
+        });
         console.log("Position", location);
     },
     autocomplete: function (map) {
@@ -113,13 +118,16 @@ let map = {
             var place = autocomplete.getPlace();
 
             selectedLocation = new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng());
-            m.initRestaurants(selectedLocation);
+            m.initRestaurants({
+                location: selectedLocation,
+                title: 'Selected Location'
+            });
         });
 
     },
     callback: function (results, status) {
-        console.log("callback::result",results);
-        console.log("callback::status",status);
+        console.log("callback::result", results);
+        console.log("callback::status", status);
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
                 map.getResultDetails(results[i]);
@@ -127,10 +135,10 @@ let map = {
         }
     },
     getResultDetails: function (result) {
-        console.log("getResultDetails::result",result);
+        console.log("getResultDetails::result", result);
         var placeLoc = result.geometry.location; //lat lng coordinates
         bounds.extend(placeLoc);
-        console.log("getResultDetails::map",this.map);
+        console.log("getResultDetails::map", this.map);
         this.map.fitBounds(bounds);
         //a place details request variable
         var request = {
@@ -143,8 +151,8 @@ let map = {
         var name;
         var m = this;
         service.getDetails(request, function (place, status) {
-            console.log("service.getDetails::place",place);
-            console.log("service.getDetails::status",status);
+            console.log("service.getDetails::place", place);
+            console.log("service.getDetails::status", status);
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 var marker = new google.maps.Marker({
                     map: m.map,
