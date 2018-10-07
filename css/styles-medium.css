@@ -2,8 +2,7 @@
 #map-container {
     order: 2;
     width: 50%;
-    z-index: 2001;
-}
+    }
 
 /**/
 #restaurant-container {
@@ -15,3 +14,4 @@
 #footer{
     
 }
+

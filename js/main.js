@@ -26,7 +26,7 @@ let view = {
         image.alt = "Photo of " + restaurant.name;
 
         const cuisine = document.getElementById('restaurant-cuisine');
-        cuisine.innerHTML = restaurant.cuisine_type;
+        cuisine.innerHTML = restaurant.rating;
 
         // fill operating hours
         if (restaurant.opening_hours) {
