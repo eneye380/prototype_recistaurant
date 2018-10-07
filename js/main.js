@@ -6,7 +6,49 @@ let model = {
 let view = {
     initMap: function () {
         map.ifSupports();
-        //alert("apple");
+    },
+    renderRestaurantDetail: function (restaurant) {
+        let plc_id = restaurant.place_id;
+        console.log("plc_id", plc_id);
+        let hey = restaurant.name;
+        console.log("restaurant_name", hey);
+        const name = document.getElementById('restaurant-name');
+        name.innerHTML = restaurant.name;
+
+        const address = document.getElementById('restaurant-address');
+        address.innerHTML = restaurant.formatted_address;
+
+        const image = document.getElementById('restaurant-img');
+        image.className = 'restaurant-img'
+        //appended .jpg
+        image.src = restaurant.photos[0].getUrl();
+        // alt attribute
+        image.alt = "Photo of " + restaurant.name;
+
+        const cuisine = document.getElementById('restaurant-cuisine');
+        cuisine.innerHTML = restaurant.cuisine_type;
+
+        // fill operating hours
+        if (restaurant.opening_hours) {
+            this.fillRestaurantHoursHTML(restaurant.opening_hours.weekday_text);
+        }
+    },
+    fillRestaurantHoursHTML: function (operatingHours) {
+        const hours = document.getElementById('restaurant-hours');
+        hours.innerHTML = "";
+        for (let key in operatingHours) {
+            const row = document.createElement('tr');
+
+            const day = document.createElement('td');
+            day.innerHTML = key;
+            row.appendChild(day);
+
+            const time = document.createElement('td');
+            time.innerHTML = operatingHours[key];
+            row.appendChild(time);
+
+            hours.appendChild(row);
+        }
     }
 };
 
@@ -53,7 +95,7 @@ let map = {
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: location,
             zoom: 4,
-            mapTypeControl:false 
+            mapTypeControl: false
         });
         console.log("initRestaurants::map", this.map);
         console.log("initRestaurants::location", location);
@@ -161,15 +203,11 @@ let map = {
                 google.maps.event.addListener(marker, 'click', function () {
                     infowindow.setContent("<b>Name:</b> " + place.name + "<br><b>Address:</b> " + place.formatted_address + "<br> <b>Phone Number: </b>" + place.formatted_phone_number + "<br> <b>Price Level:</b> " + place.price_level);
                     infowindow.open(this.map, this);
-                    plc_id = result.place_id;
-                    name = place.name;
-                    document.getElementById('restaurant_name').innerHTML = place.name;
-                    document.getElementById('restaurant_name_1').value = name;
-                    document.getElementById('placeid').value = plc_id;
-                    document.getElementById("hint").innerHTML = "enter review here";
-                    showReview(plc_id);
-                    showRating(plc_id);
-                    $('span.stars').stars();
+                    //Calls the render method of view
+                    view.renderRestaurantDetail(place);
+                    //showReview(plc_id);
+                    //showRating(plc_id);
+                    //$('span.stars').stars();
                 });
             }
         });

@@ -11,10 +11,11 @@ header nav a {
 }
 
 #form-search {
+    min-width: 100%;
+    background: transparent;
     position: absolute;
     top: 50px;
-    width: 100%;
-    background: transparent;
+    left: 0%;
 }
 
 input {
@@ -26,8 +27,12 @@ input {
     text-align: center;
 }
 
-input:focus{
+input:focus {
     background: black;
-    border:0.5px dotted purple;
+    border: 0.5px dotted purple;
 }
 
+/**/
+#restaurant-container {
+    display: block;
+}

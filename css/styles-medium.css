@@ -1,0 +1,17 @@
+/**/
+#map-container {
+    order: 2;
+    width: 50%;
+    z-index: 2001;
+}
+
+/**/
+#restaurant-container {
+    order: 1;
+    width: 50%;
+    min-height: 100%;
+}
+
+#footer{
+    
+}
