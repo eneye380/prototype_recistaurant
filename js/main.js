@@ -239,3 +239,7 @@ function initMap() {
     console.log('Google Maps API version: ' + google.maps.version);
     view.initMap();
 }
+
+if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+};

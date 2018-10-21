@@ -1,14 +1,14 @@
 {
-    "short_name": "ReciStaurant",
-    "name": "ReciStaurant",
+    "short_name": "Recistaurant",
+    "name": "Recistaurant",
     "icons": [
         {
-            "src": "/img/icons-192.png",
+            "src": "/img/logo-192.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/img/icons-512.png",
+            "src": "/img/logo-512.png",
             "type": "image/png",
             "sizes": "512x512"
         }
